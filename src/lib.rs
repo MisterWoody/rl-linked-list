@@ -9,7 +9,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let node = Node::NonEmpty(1, Box::new(Node::Empty));
-
+        // This is bad as we're calling into the memory allocator just to get an empty node representation
+        let list = Node::NonEmpty(1091, Box::new(Node::Empty));
     }
 }
