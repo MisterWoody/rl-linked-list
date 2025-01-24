@@ -1,11 +1,15 @@
-struct Node {
-    element: u32,
-    next: List,
+struct LinkedList {
+    head: Link,
 }
 
-enum List {
+struct Node {
+    element: u32,
+    next: Link,
+}
+
+enum Link {
     Empty,
-    Link(Box<Node>),
+    NonEmpty(Box<Node>),
 }
 
 #[cfg(test)]
@@ -15,9 +19,9 @@ mod tests {
     #[test]
     fn it_works() {
         // This is bad as we're calling into the memory allocator just to get an empty node representation
-        let list = List::Link(Box::new(Node {
+        let list = Link::NonEmpty(Box::new(Node {
             element: 1024,
-            next: List::Empty,
+            next: Link::Empty,
         }));
     }
 }
