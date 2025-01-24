@@ -1,6 +1,11 @@
-enum Node {
+struct Node {
+    element: u32,
+    next: List,
+}
+
+enum List {
     Empty,
-    NonEmpty(u32, Box<Node>),
+    Link(Box<Node>),
 }
 
 #[cfg(test)]
@@ -10,6 +15,11 @@ mod tests {
     #[test]
     fn it_works() {
         // This is bad as we're calling into the memory allocator just to get an empty node representation
-        let list = Node::NonEmpty(1091, Box::new(Node::Empty));
+        let list = List::Link(Box::new(Node {
+            element: 1024,
+            next: List::Empty,
+        }));
     }
 }
+
+// See https://rust-unofficial.github.io/too-many-lists/first-layout.html
