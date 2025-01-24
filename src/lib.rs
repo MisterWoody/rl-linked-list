@@ -7,10 +7,7 @@ struct Node {
     next: Link,
 }
 
-enum Link {
-    Empty,
-    NonEmpty(Box<Node>),
-}
+type Link = Option<Box<Node>>;
 
 #[cfg(test)]
 mod tests {
@@ -19,9 +16,9 @@ mod tests {
     #[test]
     fn it_works() {
         // This is bad as we're calling into the memory allocator just to get an empty node representation
-        let list = Link::NonEmpty(Box::new(Node {
+        let list = Some(Box::new(Node {
             element: 1024,
-            next: Link::Empty,
+            next: None,
         }));
     }
 }
