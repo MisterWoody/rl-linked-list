@@ -1,5 +1,11 @@
-struct LinkedList {
+pub struct LinkedList {
     head: Link,
+}
+
+impl LinkedList {
+    pub fn empty() -> LinkedList {
+        LinkedList { head: None }
+    }
 }
 
 struct Node {
@@ -15,13 +21,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        // This is bad as we're calling into the memory allocator just to get an empty node representation
-        let list = LinkedList {
-            head: Some(Box::new(Node {
-                element: 1024,
-                next: None,
-            })),
-        };
+        let list = LinkedList::empty();
     }
 }
 
