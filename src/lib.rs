@@ -12,28 +12,14 @@ impl LinkedList {
         // We can't use match on the Some case, as this tries to move data out of the list
         // this isn't allowed as data is only borrowed not owned -
         // std::mem replace functions comes into play
-        let old_head = std::mem::replace(&mut self.head, None);
+        // let old_head = std::mem::replace(&mut self.head, None);
+        // This is such a common pattern, that the following take function is exactly equivalent
+        let old_head = self.head.take();
         let new_head = Box::new(Node {
             element,
             next: old_head,
         });
         self.head = Some(new_head);
-
-        // match self.head {
-        //     None => {
-        //         self.head = Some(Box::new(Node {
-        //             element,
-        //             next: None,
-        //         }))
-        //     }
-        //     Some(n) => {
-        //         let new_head = Some(Box::new(Node {
-        //             element,
-        //             next: Some(n),
-        //         }));
-        //         self.head = new_head;
-        //     }
-        // }
     }
 }
 
