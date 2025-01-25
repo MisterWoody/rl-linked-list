@@ -30,10 +30,7 @@ impl LinkedList {
     }
 
     pub fn peek(&self) -> Option<&u32> {
-        match &self.head {
-            Some(n) => Some(&n.element),
-            None => None,
-        }
+        self.head.as_ref().map(|n| &n.element)
     }
 }
 
