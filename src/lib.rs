@@ -4,7 +4,7 @@ pub struct LinkedList<T> {
 }
 
 impl<T> LinkedList<T> {
-    pub fn empty() -> LinkedList<T> {
+    pub fn empty() -> Self {
         Self { head: None }
     }
 
