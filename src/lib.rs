@@ -1,14 +1,14 @@
 #[derive(Debug)]
-pub struct LinkedList {
-    head: Link,
+pub struct LinkedList<T> {
+    head: Link<T>,
 }
 
-impl LinkedList {
-    pub fn empty() -> LinkedList {
+impl<T> LinkedList<T> {
+    pub fn empty() -> LinkedList<T> {
         Self { head: None }
     }
 
-    pub fn push(&mut self, element: u32) {
+    pub fn push(&mut self, element: T) {
         // We can't use match on the Some case, as this tries to move data out of the list
         // this isn't allowed as data is only borrowed not owned -
         // std::mem replace functions comes into play
@@ -22,25 +22,25 @@ impl LinkedList {
         self.head = Some(new_head);
     }
 
-    pub fn pop(&mut self) -> Option<u32> {
+    pub fn pop(&mut self) -> Option<T> {
         self.head.take().map(|n| {
             self.head = n.next;
             n.element
         })
     }
 
-    pub fn peek(&self) -> Option<&u32> {
+    pub fn peek(&self) -> Option<&T> {
         self.head.as_ref().map(|n| &n.element)
     }
 }
 
 #[derive(Debug)]
-struct Node {
-    element: u32,
-    next: Link,
+struct Node<T> {
+    element: T,
+    next: Link<T>,
 }
 
-type Link = Option<Box<Node>>;
+type Link<T> = Option<Box<Node<T>>>;
 
 #[cfg(test)]
 mod tests {
