@@ -16,10 +16,12 @@ mod tests {
     #[test]
     fn it_works() {
         // This is bad as we're calling into the memory allocator just to get an empty node representation
-        let list = Some(Box::new(Node {
-            element: 1024,
-            next: None,
-        }));
+        let list = LinkedList {
+            head: Some(Box::new(Node {
+                element: 1024,
+                next: None,
+            })),
+        };
     }
 }
 
