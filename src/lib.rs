@@ -21,6 +21,17 @@ impl LinkedList {
         });
         self.head = Some(new_head);
     }
+
+    pub fn pop(&mut self) -> Option<u32> {
+        let old_head = self.head.take();
+        match old_head {
+            Some(n) => {
+                self.head = n.next;
+                Some(n.element)
+            }
+            None => None,
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -41,6 +52,14 @@ mod tests {
         list.push(1024);
         list.push(42);
         dbg!(list);
+    }
+
+    #[test]
+    fn test_pop() {
+        let mut list = LinkedList::empty();
+        list.push(1042);
+        let elem = list.pop();
+        assert_eq!(elem, Some(1042));
     }
 }
 
