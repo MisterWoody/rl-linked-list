@@ -23,8 +23,7 @@ impl LinkedList {
     }
 
     pub fn pop(&mut self) -> Option<u32> {
-        let old_head = self.head.take();
-        old_head.map(|n| {
+        self.head.take().map(|n| {
             self.head = n.next;
             n.element
         })
