@@ -28,6 +28,13 @@ impl LinkedList {
             n.element
         })
     }
+
+    pub fn peek(&self) -> Option<&u32> {
+        match &self.head {
+            Some(n) => Some(&n.element),
+            None => None,
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -56,6 +63,13 @@ mod tests {
         list.push(1042);
         let elem = list.pop();
         assert_eq!(elem, Some(1042));
+    }
+
+    #[test]
+    fn test_peek() {
+        let mut list = LinkedList::empty();
+        list.push(43);
+        assert_eq!(list.peek(), Some(&43));
     }
 }
 
