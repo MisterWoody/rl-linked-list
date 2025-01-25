@@ -9,9 +9,6 @@ impl<T> LinkedList<T> {
     }
 
     pub fn push(&mut self, element: T) {
-        // We can't use match on the Some case, as this tries to move data out of the list
-        // this isn't allowed as data is only borrowed not owned -
-        // std::mem replace functions comes into play
         // let old_head = std::mem::replace(&mut self.head, None);
         // This is such a common pattern, that the following take function is exactly equivalent
         let old_head = self.head.take();
